@@ -1,0 +1,63 @@
+<html>
+    <style>
+    </style>
+    <script>
+        /**
+         * Break  In
+         * This solution can separate text according to a given delimiter which can be a semicolon, colons and so on.
+         * Results can be listed inline or each per line
+         *
+         * @author ERIQUE BOMFIM <erique.bomfim@gmail.com>
+         */
+
+        var entry, delimiter, brk, dataArr, sortWay;
+
+        function sort(a, b) {
+             return a - b;
+        }
+
+        function process() {
+
+            delimiter = document.getElementById("delimiter").value;
+            entry = document.getElementById("entry");
+            dataArr = entry.value.split(delimiter);
+            brk = document.getElementById('breaks');
+
+            var vorder = document.getElementById('sort-way').value
+            if (vorder != 0) {
+                sortWay = vorder
+                dataArr.sort();
+                if (vorder == 2){
+                    dataArr.reverse();
+                }
+            }
+
+            var glue = document.getElementById('separator').value || delimiter;
+            glue += brk.checked ? '\n' : '';
+
+            entry.value = dataArr.join(glue);
+        }
+
+        window.onload = function() {
+            document.getElementById("send").onclick = process;
+        }
+    </script>
+    <body>
+        <fieldset>
+            <legend>Break in</legend>
+            <div>		
+                <input type="text" id="delimiter" placeholder="delimiter" />
+                <input type="text" id="separator" placeholder="new separator" />				
+                <label for="sort-way">Sort</label>
+                <select id="sort-way">
+                    <option value="0">none</option>
+                    <option value="1" selected>ASC</option>
+                    <option value="2">DESC</option>
+                </select>
+                <input type="checkbox" id="breaks" /> Break in lines 
+            </div>
+            <textarea id="entry" cols="80" rows="10" placeholder="paste or type text here"></textarea><br>
+            <a href="#" id="send">run</a>
+        </fieldset>
+    </body>
+</html>
